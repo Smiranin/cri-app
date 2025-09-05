@@ -13,7 +13,7 @@ import { Movie } from '../../../types/movie.interface';
 })
 export class TrailerPreviewComponent implements OnInit, OnDestroy {
   @Input() trailerId?: string;
-  @Output() close = new EventEmitter<void>();
+  @Output() trailerClosed = new EventEmitter<void>();
 
   protected movie?: Movie;
 
@@ -52,7 +52,7 @@ export class TrailerPreviewComponent implements OnInit, OnDestroy {
   }
 
   protected closeTrailer(): void {
-    this.close.emit();
+    this.trailerClosed.emit();
     // Navigate back if we're in a route
     if (this.route.snapshot.url.length > 0) {
       this.router.navigate(['/']);
