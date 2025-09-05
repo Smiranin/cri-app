@@ -1,0 +1,49 @@
+.chronology-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.decade-section {
+  border-left: 4px solid #2563eb;
+  padding-left: 2rem;
+}
+
+.decade-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+  position: relative;
+}
+
+.decade-title::before {
+  content: '';
+  position: absolute;
+  left: -2.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #2563eb;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 0 0 2px #2563eb;
+}
+
+@media (max-width: 768px) {
+  .decade-section {
+    border-left: 3px solid #2563eb;
+    padding-left: 1rem;
+  }
+
+  .decade-title {
+    font-size: 1.5rem;
+  }
+
+  .decade-title::before {
+    left: -1.875rem;
+    width: 12px;
+    height: 12px;
+  }
+}

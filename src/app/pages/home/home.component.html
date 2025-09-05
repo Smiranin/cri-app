@@ -1,0 +1,20 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>Top 10 Films of All Time</h1>
+    <p class="page-subtitle">The highest-rated movies according to IMDb rankings</p>
+  </header>
+
+  @if (loading$ | async) {
+    <div class="loading">Loading movies...</div>
+  }
+
+  @if (error$ | async; as error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  <div class="movies-grid">
+    @for (movie of topMovies$ | async; track movie.id) {
+      <app-movie-card [movie]="movie" />
+    }
+  </div>
+</div>

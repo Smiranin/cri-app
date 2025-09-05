@@ -1,0 +1,31 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>Movies by Decade</h1>
+    <p class="page-subtitle">
+      Explore the greatest films organized by the decade they were released
+    </p>
+  </header>
+
+  @if (loading$ | async) {
+    <div class="loading">Loading movies...</div>
+  }
+
+  @if (error$ | async; as error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (moviesByDecade$ | async; as moviesByDecade) {
+    <div class="chronology-container">
+      @for (decade of getDecades(moviesByDecade); track decade) {
+        <section class="decade-section">
+          <h2 class="decade-title">{{ decade }}</h2>
+          <div class="movies-grid">
+            @for (movie of moviesByDecade[decade]; track movie.id) {
+              <app-movie-card [movie]="movie" />
+            }
+          </div>
+        </section>
+      }
+    </div>
+  }
+</div>

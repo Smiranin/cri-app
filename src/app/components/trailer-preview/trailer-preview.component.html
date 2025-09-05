@@ -1,0 +1,29 @@
+@if (movie) {
+  <div class="trailer-overlay" (click)="closeTrailer()">
+    <div class="trailer-container" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeTrailer()">×</button>
+
+      <div class="trailer-header">
+        <h2>{{ movie.title }} ({{ movie.release_date }})</h2>
+      </div>
+
+      <div class="video-container">
+        <iframe
+          [src]="getYouTubeEmbedUrl()"
+          title="Movie Trailer"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="trailer-info">
+        <p class="movie-plot">{{ movie.overview }}</p>
+        <div class="movie-details">
+          <span><strong>Rating:</strong> {{ movie.vote_average }}</span>
+          <span><strong>Genre:</strong> {{ movie.genre_ids.join(', ') }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+}

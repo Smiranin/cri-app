@@ -1,0 +1,34 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>My Favorite Movies</h1>
+    <p class="page-subtitle">Your personally curated collection of favorite films</p>
+  </header>
+
+  @if (loading$ | async) {
+    <div class="loading">Loading favorites...</div>
+  }
+
+  @if (error$ | async; as error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (favoriteMovies$ | async; as favoriteMovies) {
+    @if (favoriteMovies.length > 0) {
+      <div class="movies-grid">
+        @for (movie of favoriteMovies; track movie.id) {
+          <app-movie-card [movie]="movie" />
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <div class="empty-icon">🎬</div>
+        <h2>No Favorites Yet</h2>
+        <p>
+          Start building your collection by clicking the heart icon on any movie card. Your
+          favorites will be saved and appear here.
+        </p>
+        <a href="/home" class="cta-button"> Browse Top Movies </a>
+      </div>
+    }
+  }
+</div>

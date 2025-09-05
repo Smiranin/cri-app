@@ -1,0 +1,65 @@
+<div class="movie-card">
+  <div class="movie-card__image-container">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w1280/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg'"
+      [alt]="movie.title"
+      class="movie-card__image"
+      loading="lazy"
+    />
+    <div
+      class="movie-card__play-overlay"
+      [routerLink]="['/trailer', movie.id]"
+      title="Watch Trailer"
+    >
+      <div class="play-icon">▶</div>
+    </div>
+  </div>
+
+  <div class="movie-card__content">
+    <div class="movie-card__header">
+      <h3 class="movie-card__title">{{ movie.title }}</h3>
+      <button
+        class="movie-card__favorite-btn"
+        [class.favorite-active]="isFavorite$ | async"
+        (click)="toggleFavorite()"
+        [title]="(isFavorite$ | async) ? 'Remove from favorites' : 'Add to favorites'"
+      >
+        {{ (isFavorite$ | async) ? '❤️' : '🤍' }}
+      </button>
+    </div>
+
+    <div class="movie-card__info">
+      <div class="info-item">
+        <span class="info-label">Year:</span>
+        <span class="info-value">{{ movie.release_date }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Rating:</span>
+        <span class="info-value">{{ movie.vote_average }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Genre:</span>
+        <span class="info-value">{{ movie.genre_ids.join(', ') }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Director:</span>
+        <a
+          [href]="'https://imdb.com/name/' + movie.original_language"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="info-value info-link"
+        >
+          {{ movie.original_language }}
+        </a>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Countries:</span>
+        <span class="info-value">{{ movie.original_language }}</span>
+      </div>
+    </div>
+
+    <div class="movie-card__plot">
+      <p>{{ movie.overview }}</p>
+    </div>
+  </div>
+</div>
