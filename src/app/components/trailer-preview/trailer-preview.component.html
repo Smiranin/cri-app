@@ -1,48 +1,63 @@
-@if (movie) {
-  <div
-    class="trailer-overlay"
-    (click)="closeTrailer()"
-    (keydown.escape)="closeTrailer()"
-    tabindex="0"
-    role="button"
-    aria-label="Close trailer overlay"
-  >
-    <div
-      class="trailer-container"
-      (click)="$event.stopPropagation()"
-      (keydown)="$event.stopPropagation()"
-      tabindex="0"
-    >
-      <button
-        class="close-button"
-        (click)="closeTrailer()"
-        type="button"
-        aria-label="Close trailer"
-      >
-        ×
-      </button>
+@if (movieData) {
+  <div class="trailer-overlay" (click)="closeTrailer()" tabindex="0" role="button" aria-label="Close trailer overlay">
+    <div class="trailer-container" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" tabindex="0">
+      <button class="close-button" (click)="closeTrailer()" type="button" aria-label="Close trailer">✕</button>
 
-      <div class="trailer-header">
-        <h2>{{ movie.title }} ({{ movie.release_date }})</h2>
-      </div>
+      @if (movieData) {
+        <div class="trailer-header">
+          <h2>{{ movieData.title }} ({{ movieData.release_date | date: 'yyyy' }})</h2>
+        </div>
+      }
 
       <div class="video-container">
-        <iframe
-          [src]="getYouTubeEmbedUrl()"
-          title="Movie Trailer"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard--commint write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        @if (isVideoLoading && !hasVideoError) {
+          <div class="video-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading trailer...</p>
+          </div>
+        }
+
+        @if (hasVideoError) {
+          <div class="video-error">
+            <div class="error-icon">⚠️</div>
+            <h3>Unable to load trailer</h3>
+            <p>The video could not be loaded. Please try again later.</p>
+            <button class="retry-button" (click)="retryVideo()">Try Again</button>
+          </div>
+        }
+
+        @if (!hasVideoError && embedUrl(); as url) {
+          <iframe
+            [src]="url"
+            title="Movie Trailer"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            (load)="onVideoLoad()"
+            (error)="onVideoError()"
+            [style.display]="isVideoLoading ? 'none' : 'block'"
+          ></iframe>
+        }
       </div>
 
-      <div class="trailer-info">
-        <p class="movie-plot">{{ movie.overview }}</p>
-        <div class="movie-details">
-          <span><strong>Rating:</strong> {{ movie.vote_average }}</span>
-          <span><strong>Genre:</strong> {{ movie.genre_ids.join(', ') }}</span>
+      @if (movieData) {
+        <div class="trailer-info">
+          <p class="movie-plot">{{ movieData.overview }}</p>
+          <div class="movie-details">
+            <span><strong>Rating:</strong> {{ movieData.vote_average }}</span>
+            <span><strong>Genre:</strong> {{ movieData.genres | join }}</span>
+          </div>
+
+          @if (movieData.trailerUrl) {
+            <p class="trailer-fallback-text">
+              If trailer is not loaded you can
+              <a href="#" (click)="openVideoInNewTab(); $event.preventDefault()" class="trailer-link">
+                visit their website
+              </a>
+            </p>
+          }
         </div>
-      </div>
+      }
     </div>
   </div>
 }

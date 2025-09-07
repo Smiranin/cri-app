@@ -17,8 +17,11 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "html.format.enable": false,
   "json.format.enable": false,
+  "angular.enable-strict-mode-prompt": false,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

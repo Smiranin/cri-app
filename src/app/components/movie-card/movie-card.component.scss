@@ -3,7 +3,9 @@
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
     position: relative;
     overflow: hidden;
     aspect-ratio: 2/3;
-    
+
     &:hover .movie-card__play-overlay {
       opacity: 1;
     }
@@ -101,12 +103,33 @@
 
   &__plot {
     margin-top: auto;
-    
+
+    .plot-content {
+      position: relative;
+    }
+
     p {
       font-size: 0.9rem;
       color: #666;
       line-height: 1.4;
       margin: 0;
+      transition: all 0.3s ease;
+
+      &:not(.expanded) {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        max-height: 4.2rem; // Roughly 3 lines
+      }
+
+      &.expanded {
+        overflow: visible;
+        display: block;
+        -webkit-line-clamp: unset;
+        max-height: none;
+      }
     }
   }
 }
@@ -135,16 +158,51 @@
 .info-link {
   color: #2563eb;
   text-decoration: none;
-  
+
   &:hover {
     text-decoration: underline;
   }
 }
 
+.show-more-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  margin-top: 0.5rem;
+  display: block;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
 @keyframes heartbeat {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 768px) {
@@ -160,7 +218,7 @@
 
   .info-item {
     flex-direction: column;
-    
+
     .info-label {
       min-width: auto;
       margin-right: 0;

@@ -12,7 +12,7 @@
     <div class="error">{{ error }}</div>
   }
 
-  @if (favoriteMovies$ | async; as favoriteMovies) {
+  @if (favoriteMovies) {
     @if (favoriteMovies.length > 0) {
       <div class="movies-grid">
         @for (movie of favoriteMovies; track movie.id) {
@@ -24,8 +24,8 @@
         <div class="empty-icon">🎬</div>
         <h2>No Favorites Yet</h2>
         <p>
-          Start building your collection by clicking the heart icon on any movie card. Your
-          favorites will be saved and appear here.
+          Start building your collection by clicking the heart icon on any movie card. Your favorites will be saved and
+          appear here.
         </p>
         <a href="/home" class="cta-button"> Browse Top Movies </a>
       </div>

@@ -1,12 +1,22 @@
+@use 'sass:math';
+
+// SCSS Variables for timeline positioning
+$border-width: 4px;
+$padding-left: 2rem;
+$circle-size: 16px;
+$circle-border: 4px;
+
+// Calculate the position to center the circle on the border
+$circle-left-offset: calc(-#{$padding-left} - #{math.div($border-width, 2)} - #{math.div($circle-size, 2)});
+
 .chronology-container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
 }
 
 .decade-section {
-  border-left: 4px solid #2563eb;
-  padding-left: 2rem;
+  border-left: $border-width solid #2563eb;
+  padding-left: $padding-left;
 }
 
 .decade-title {
@@ -20,21 +30,29 @@
 .decade-title::before {
   content: '';
   position: absolute;
-  left: -2.75rem;
+  left: $circle-left-offset;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
+  width: $circle-size;
+  height: $circle-size;
   background: #2563eb;
   border-radius: 50%;
-  border: 4px solid white;
+  border: $circle-border solid white;
   box-shadow: 0 0 0 2px #2563eb;
 }
 
 @media (max-width: 768px) {
+  // Mobile-specific variables
+  $mobile-border-width: 3px;
+  $mobile-padding-left: 1rem;
+  $mobile-circle-size: 12px;
+  $mobile-circle-left-offset: calc(
+    -#{$mobile-padding-left} - #{math.div($mobile-border-width, 2)} - #{math.div($mobile-circle-size, 2)}
+  );
+
   .decade-section {
-    border-left: 3px solid #2563eb;
-    padding-left: 1rem;
+    border-left: $mobile-border-width solid #2563eb;
+    padding-left: $mobile-padding-left;
   }
 
   .decade-title {
@@ -42,8 +60,8 @@
   }
 
   .decade-title::before {
-    left: -1.875rem;
-    width: 12px;
-    height: 12px;
+    left: $mobile-circle-left-offset;
+    width: $mobile-circle-size;
+    height: $mobile-circle-size;
   }
 }

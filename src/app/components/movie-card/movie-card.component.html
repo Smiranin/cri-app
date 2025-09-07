@@ -1,16 +1,7 @@
 <div class="movie-card">
   <div class="movie-card__image-container">
-    <img
-      [src]="'https://image.tmdb.org/t/p/w1280/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg'"
-      [alt]="movie.title"
-      class="movie-card__image"
-      loading="lazy"
-    />
-    <div
-      class="movie-card__play-overlay"
-      [routerLink]="['/trailer', movie.id]"
-      title="Watch Trailer"
-    >
+    <img [src]="movie.poster_path | posterSrc: 'w500'" [alt]="movie.title" class="movie-card__image" loading="lazy" />
+    <div class="movie-card__play-overlay" [routerLink]="['/trailer', movie.id]" title="Watch Trailer">
       <div class="play-icon">▶</div>
     </div>
   </div>
@@ -20,18 +11,18 @@
       <h3 class="movie-card__title">{{ movie.title }}</h3>
       <button
         class="movie-card__favorite-btn"
-        [class.favorite-active]="isFavorite$ | async"
+        [class.favorite-active]="isFavorite"
         (click)="toggleFavorite()"
-        [title]="(isFavorite$ | async) ? 'Remove from favorites' : 'Add to favorites'"
+        [title]="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
       >
-        {{ (isFavorite$ | async) ? '❤️' : '🤍' }}
+        {{ isFavorite ? '❤️' : '🤍' }}
       </button>
     </div>
 
     <div class="movie-card__info">
       <div class="info-item">
         <span class="info-label">Year:</span>
-        <span class="info-value">{{ movie.release_date }}</span>
+        <span class="info-value">{{ movie.release_date | date: 'yyyy' }}</span>
       </div>
       <div class="info-item">
         <span class="info-label">Rating:</span>
@@ -39,7 +30,7 @@
       </div>
       <div class="info-item">
         <span class="info-label">Genre:</span>
-        <span class="info-value">{{ movie.genre_ids.join(', ') }}</span>
+        <span class="info-value">{{ movie.genres | join }}</span>
       </div>
       <div class="info-item">
         <span class="info-label">Director:</span>
@@ -59,7 +50,19 @@
     </div>
 
     <div class="movie-card__plot">
-      <p>{{ movie.overview }}</p>
+      <div class="plot-content">
+        <p [class.expanded]="isExpanded">{{ movie.overview | truncate: maxDescriptionLength : '...' : isExpanded }}</p>
+        @if (shouldShowToggle()) {
+          <button
+            class="show-more-btn"
+            (click)="toggleDescription()"
+            [attr.aria-expanded]="isExpanded"
+            [attr.aria-label]="isExpanded ? 'Show less description' : 'Show more description'"
+          >
+            {{ isExpanded ? 'Show less' : 'Show more' }}
+          </button>
+        }
+      </div>
     </div>
   </div>
 </div>

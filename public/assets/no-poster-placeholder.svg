@@ -1,0 +1,59 @@
+<svg width="300" height="450" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="450" fill="#2a2a2a"/>
+  
+  <!-- Border -->
+  <rect x="10" y="10" width="280" height="430" fill="none" stroke="#4a4a4a" stroke-width="2"/>
+  
+  <!-- Film reel icon -->
+  <g transform="translate(150, 180)">
+    <!-- Outer circle -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#666" stroke-width="3"/>
+    <!-- Inner circle -->
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#666" stroke-width="2"/>
+    <!-- Spokes -->
+    <line x1="-15" y1="0" x2="-40" y2="0" stroke="#666" stroke-width="2"/>
+    <line x1="15" y1="0" x2="40" y2="0" stroke="#666" stroke-width="2"/>
+    <line x1="0" y1="-15" x2="0" y2="-40" stroke="#666" stroke-width="2"/>
+    <line x1="0" y1="15" x2="0" y2="40" stroke="#666" stroke-width="2"/>
+    <!-- Diagonal spokes -->
+    <line x1="-10.6" y1="-10.6" x2="-28.3" y2="-28.3" stroke="#666" stroke-width="2"/>
+    <line x1="10.6" y1="10.6" x2="28.3" y2="28.3" stroke="#666" stroke-width="2"/>
+    <line x1="10.6" y1="-10.6" x2="28.3" y2="-28.3" stroke="#666" stroke-width="2"/>
+    <line x1="-10.6" y1="10.6" x2="-28.3" y2="28.3" stroke="#666" stroke-width="2"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="3" fill="#666"/>
+    <!-- Film holes -->
+    <circle cx="-30" cy="0" r="3" fill="#2a2a2a"/>
+    <circle cx="30" cy="0" r="3" fill="#2a2a2a"/>
+    <circle cx="0" cy="-30" r="3" fill="#2a2a2a"/>
+    <circle cx="0" cy="30" r="3" fill="#2a2a2a"/>
+  </g>
+  
+  <!-- Film strip decoration -->
+  <rect x="50" y="100" width="200" height="20" fill="#333" opacity="0.5"/>
+  <rect x="55" y="102" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="68" y="102" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="81" y="102" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="217" y="102" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="230" y="102" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="243" y="102" width="8" height="16" fill="#2a2a2a"/>
+  
+  <rect x="50" y="330" width="200" height="20" fill="#333" opacity="0.5"/>
+  <rect x="55" y="332" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="68" y="332" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="81" y="332" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="217" y="332" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="230" y="332" width="8" height="16" fill="#2a2a2a"/>
+  <rect x="243" y="332" width="8" height="16" fill="#2a2a2a"/>
+  
+  <!-- Text -->
+  <text x="150" y="280" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="18" font-weight="bold">NO POSTER</text>
+  <text x="150" y="305" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="18" font-weight="bold">AVAILABLE</text>
+  
+  <!-- Additional decorative elements -->
+  <circle cx="75" cy="60" r="2" fill="#444" opacity="0.7"/>
+  <circle cx="225" cy="60" r="2" fill="#444" opacity="0.7"/>
+  <circle cx="75" cy="390" r="2" fill="#444" opacity="0.7"/>
+  <circle cx="225" cy="390" r="2" fill="#444" opacity="0.7"/>
+</svg>
