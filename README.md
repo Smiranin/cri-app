@@ -2,7 +2,7 @@
 
 A modern Angular application for browsing IMDb movies with timeline and favorites functionality. This project serves as a technical assessment demonstrating modern Angular development practices, reactive programming with RxJS, and clean architecture patterns.
 
-> **Note:** This project is a complete rewrite of an original movie-site application I built 8 years ago as a test task. You can find the original version in my repository. The current version showcases modern Angular practices and architecture patterns used in today's development workflows.
+> **Note:** This project is a complete rewrite of an original movie-site application I built **8 years** ago as a test assessment. You can find the original version at [github.com/Smiranin/movie-site](https://github.com/Smiranin/movie-site). This rewrite reflects my current understanding of how Angular applications should be architected and represents the patterns, practices, and principles I actively implement in my professional development workflow.
 
 ## 🎯 Project Overview
 
