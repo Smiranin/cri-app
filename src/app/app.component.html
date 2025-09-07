@@ -10,6 +10,20 @@
         <a routerLink="/home" routerLinkActive="active" class="nav-link"> Home </a>
         <a routerLink="/chronology" routerLinkActive="active" class="nav-link"> Chronology </a>
         <a routerLink="/favorites" routerLinkActive="active" class="nav-link"> Favorites </a>
+        <button
+          class="theme-toggle"
+          (click)="onToggleTheme()"
+          [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
+          title="Toggle theme"
+        >
+          <span class="theme-icon">
+            @if (themeService.isDarkMode()) {
+              ☀️
+            } @else {
+              🌙
+            }
+          </span>
+        </button>
       </nav>
     </div>
   </div>

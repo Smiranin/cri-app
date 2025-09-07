@@ -1,0 +1,65 @@
+/* Theme Variables */
+:root {
+  /* Light Theme Colors */
+  --bg-color: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --text-color: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #6b7280;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card-bg: #ffffff;
+  --card-hover-bg: #f7fafc;
+  --rating-bg: #fbbf24;
+  --link-color: #2563eb;
+  --link-hover-color: #1d4ed8;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+}
+
+/* Dark Theme Colors */
+.dark-theme {
+  --bg-color: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-color: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #475569;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --header-bg: linear-gradient(135deg, #4338ca 0%, #5b21b6 100%);
+  --card-bg: #1e293b;
+  --card-hover-bg: #334155;
+  --rating-bg: #eab308;
+  --link-color: #60a5fa;
+  --link-hover-color: #3b82f6;
+  --success-color: #22c55e;
+  --error-color: #f87171;
+  --warning-color: #fbbf24;
+}
+
+/* Scrollbar Dark Theme */
+.dark-theme ::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Theme Transition */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}

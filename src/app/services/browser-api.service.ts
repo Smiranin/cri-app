@@ -216,4 +216,44 @@ export class BrowserApiService {
   public getUserAgent(): Observable<string> {
     return from(Promise.resolve(navigator.userAgent));
   }
+
+  /**
+   * Checks if the user prefers dark color scheme
+   * @returns Observable with boolean indicating dark mode preference
+   */
+  public prefersDarkColorScheme(): Observable<boolean> {
+    try {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return from(Promise.resolve(prefersDark || false));
+    } catch (error) {
+      console.warn('Failed to check color scheme preference:', error);
+      return from(Promise.resolve(false));
+    }
+  }
+
+  /**
+   * Gets the window object (for direct access when needed)
+   * @returns Observable with the window object or null if not available
+   */
+  public getWindow(): Observable<Window | null> {
+    try {
+      return from(Promise.resolve(typeof window !== 'undefined' ? window : null));
+    } catch (error) {
+      console.warn('Failed to access window object:', error);
+      return from(Promise.resolve(null));
+    }
+  }
+
+  /**
+   * Gets the document object
+   * @returns Observable with the document object or null if not available
+   */
+  public getDocument(): Observable<Document | null> {
+    try {
+      return from(Promise.resolve(typeof document !== 'undefined' ? document : null));
+    } catch (error) {
+      console.warn('Failed to access document object:', error);
+      return from(Promise.resolve(null));
+    }
+  }
 }

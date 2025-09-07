@@ -1,7 +1,7 @@
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--header-bg);
   color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--shadow-color);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -55,7 +55,41 @@
   }
 }
 
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-content {
   min-height: calc(100vh - 70px);
-  background: #f8fafc;
+  background: var(--bg-color, #f8fafc);
+  color: var(--text-color, #1a202c);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }

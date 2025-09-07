@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ThemeService } from './services/theme.service';
 
 /**
  * Root component of the Movie Database application.
@@ -25,4 +26,12 @@ export class AppComponent {
    * This is a readonly property that cannot be modified after initialization.
    */
   protected readonly title = 'Movie Database';
+  protected readonly themeService = inject(ThemeService);
+
+  /**
+   * Toggle the application theme between light and dark mode
+   */
+  onToggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 }
