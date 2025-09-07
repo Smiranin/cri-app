@@ -192,65 +192,6 @@ export class MovieStateService {
   }
 
   /**
-   * Searches for movies using both cached data and API fallback.
-   *
-   * First performs a search across all cached movie collections.
-   * If sufficient results are found in cache, returns them immediately.
-   * Otherwise, performs an API search for comprehensive results.
-   *
-   * @param query - Search query string. Empty queries return empty results.
-   * @param limit - Maximum number of search results to return. Defaults to 50.
-   * @returns Observable emitting an array of movies matching the search criteria.
-   */
-  public searchMovies(query: string, limit: number = 50): Observable<Movie[]> {
-    if (!query.trim()) {
-      return of([]);
-    }
-
-    // Search in cached data first
-    const currentState = this.state$.value;
-    const allCachedMovies: Movie[] = [];
-
-    for (const cache of currentState.cache.values()) {
-      allCachedMovies.push(...cache.movies);
-    }
-
-    // Remove duplicates based on ID
-    const uniqueCachedMovies = allCachedMovies.filter(
-      (movie, index, self) => self.findIndex(m => m.id === movie.id) === index
-    );
-
-    const lowerQuery = query.toLowerCase();
-    const cachedResults = uniqueCachedMovies.filter(
-      movie =>
-        movie.title.toLowerCase().includes(lowerQuery) ||
-        movie.original_title.toLowerCase().includes(lowerQuery) ||
-        movie.overview.toLowerCase().includes(lowerQuery)
-    );
-
-    // If we have enough cached results, return them
-    if (cachedResults.length >= limit) {
-      return of(cachedResults.slice(0, limit));
-    }
-
-    // Otherwise, fetch from API
-    this.setLoading(true);
-
-    return this.movieApiService.searchMovies(query, limit).pipe(
-      tap(() => {
-        this.setLoading(false);
-        this.setError(null);
-      }),
-      catchError(error => {
-        this.setLoading(false);
-        this.setError('Failed to search movies');
-        console.error('Error searching movies:', error);
-        return of(cachedResults.slice(0, limit));
-      })
-    );
-  }
-
-  /**
    * Retrieves cached movie data for the specified cache key.
    *
    * @param cacheKey - The unique identifier for the cache entry to retrieve.

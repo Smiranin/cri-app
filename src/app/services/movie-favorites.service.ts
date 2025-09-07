@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, tap } from 'rxjs';
 import { FavoritesState } from '../models/app-state.model';
 import { BrowserApiService } from './browser-api.service';
 
@@ -48,10 +48,16 @@ export class MovieFavoritesService {
   public readonly favorites$ = this.favoriteIds$.pipe(map(favoriteIds => Array.from(favoriteIds)));
 
   /** Observable indicating if favorite operations are in progress. */
-  public readonly loading$ = this.state$.pipe(map(state => state.loading));
+  public readonly loading$ = this.state$.pipe(
+    map(state => state.loading),
+    distinctUntilChanged()
+  );
 
   /** Observable containing error messages from favorite operations. */
-  public readonly error$ = this.state$.pipe(map(state => state.error));
+  public readonly error$ = this.state$.pipe(
+    map(state => state.error),
+    distinctUntilChanged()
+  );
 
   /**
    * Initializes the service and loads existing favorites from storage.

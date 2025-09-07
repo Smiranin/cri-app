@@ -62,6 +62,20 @@ export class ThemeService {
   }
 
   /**
+   * Detects and sets theme based on system preference
+   */
+  private setThemeFromSystemPreference(): void {
+    this.browserApi.prefersDarkColorScheme().subscribe({
+      next: prefersDark => {
+        this._currentTheme.set(prefersDark ? THEMES.DARK : THEMES.LIGHT);
+      },
+      error: () => {
+        this._currentTheme.set(THEMES.LIGHT); // Default to light theme if detection fails
+      },
+    });
+  }
+
+  /**
    * Initialize theme from localStorage or system preference
    */
   private initializeTheme(): void {
@@ -78,25 +92,11 @@ export class ThemeService {
         }
 
         // Fall back to system preference
-        this.browserApi.prefersDarkColorScheme().subscribe({
-          next: prefersDark => {
-            this._currentTheme.set(prefersDark ? THEMES.DARK : THEMES.LIGHT);
-          },
-          error: () => {
-            this._currentTheme.set(THEMES.LIGHT); // Default to light theme if detection fails
-          },
-        });
+        this.setThemeFromSystemPreference();
       },
       error: () => {
         // If localStorage access fails, fall back to system preference
-        this.browserApi.prefersDarkColorScheme().subscribe({
-          next: prefersDark => {
-            this._currentTheme.set(prefersDark ? THEMES.DARK : THEMES.LIGHT);
-          },
-          error: () => {
-            this._currentTheme.set(THEMES.LIGHT); // Default to light theme if detection fails
-          },
-        });
+        this.setThemeFromSystemPreference();
       },
     });
   }

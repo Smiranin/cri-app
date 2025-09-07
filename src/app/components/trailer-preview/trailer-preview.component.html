@@ -3,11 +3,9 @@
     <div class="trailer-container" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" tabindex="0">
       <button class="close-button" (click)="closeTrailer()" type="button" aria-label="Close trailer">✕</button>
 
-      @if (movieData) {
-        <div class="trailer-header">
-          <h2>{{ movieData.title }} ({{ movieData.release_date | date: 'yyyy' }})</h2>
-        </div>
-      }
+      <div class="trailer-header">
+        <h2>{{ movieData.title }} ({{ movieData.release_date | date: 'yyyy' }})</h2>
+      </div>
 
       <div class="video-container">
         @if (isVideoLoading && !hasVideoError) {
@@ -40,24 +38,22 @@
         }
       </div>
 
-      @if (movieData) {
-        <div class="trailer-info">
-          <p class="movie-plot">{{ movieData.overview }}</p>
-          <div class="movie-details">
-            <span><strong>Rating:</strong> {{ movieData.vote_average }}</span>
-            <span><strong>Genre:</strong> {{ movieData.genres | join }}</span>
-          </div>
-
-          @if (movieData.trailerUrl) {
-            <p class="trailer-fallback-text">
-              If trailer is not loaded you can
-              <a href="#" (click)="openVideoInNewTab(); $event.preventDefault()" class="trailer-link">
-                visit their website
-              </a>
-            </p>
-          }
+      <div class="trailer-info">
+        <p class="movie-plot">{{ movieData.overview }}</p>
+        <div class="movie-details">
+          <span><strong>Rating:</strong> {{ movieData.vote_average }}</span>
+          <span><strong>Genre:</strong> {{ movieData.genres | join }}</span>
         </div>
-      }
+
+        @if (movieData.trailerUrl) {
+          <p class="trailer-fallback-text">
+            If trailer is not loaded you can
+            <a href="#" (click)="openVideoInNewTab(); $event.preventDefault()" class="trailer-link">
+              visit their website
+            </a>
+          </p>
+        }
+      </div>
     </div>
   </div>
 }

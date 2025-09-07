@@ -8,11 +8,6 @@ import { ThemeService } from './services/theme.service';
  *
  * This component serves as the main entry point and layout container for the entire application.
  * It provides the navigation structure and router outlet for displaying different pages.
- *
- * @example
- * ```html
- * <app-root></app-root>
- * ```
  */
 @Component({
   selector: 'app-root',

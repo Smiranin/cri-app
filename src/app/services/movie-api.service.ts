@@ -76,35 +76,4 @@ export class MovieApiService {
     // In a real implementation, this would make an HTTP request to /movies/{id}
     return of(movies).pipe(map(movieList => movieList.find(movie => movie.id === id)));
   }
-
-  /**
-   * Searches movies by title, original title, overview, or genres.
-   *
-   * Performs case-insensitive text matching across multiple movie fields
-   * to provide comprehensive search results.
-   *
-   * @param query - Search query string. Empty or whitespace-only queries return empty results.
-   * @param limit - Maximum number of results to return. Defaults to 50.
-   * @returns Observable emitting an array of movies matching the search criteria.
-   */
-  public searchMovies(query: string, limit: number = 50): Observable<Movie[]> {
-    if (!query.trim()) {
-      return of([]);
-    }
-
-    const lowerQuery = query.toLowerCase();
-    return of(movies).pipe(
-      map(movieList =>
-        movieList
-          .filter(
-            movie =>
-              movie.title.toLowerCase().includes(lowerQuery) ||
-              movie.original_title.toLowerCase().includes(lowerQuery) ||
-              movie.overview.toLowerCase().includes(lowerQuery) ||
-              movie.genres.some(genre => genre.toLowerCase().includes(lowerQuery))
-          )
-          .slice(0, limit)
-      )
-    );
-  }
 }
